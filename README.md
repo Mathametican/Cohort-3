@@ -10,3 +10,4 @@ for(Contact loopContact:get_Contact){
     System.debug(loopContact);
     System.debug('---------');
 }
+SELECT Account.Name, Id, FirstName, LastName, Phone, Email, Title, Department FROM Contact
