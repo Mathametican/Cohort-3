@@ -1,0 +1,10 @@
+/*List<Account> Acclist=[SELECT Id, Name FROM Account ORDER BY Name];
+    for(Integer x=0;x<AccList.size();x++){
+         System.debug(Acclist.get(x).Name);
+    }// burada Acclist listesinden sadece Nameleri getirdim. 
+// Diğer türlü getüremedim neden getircem ŞİMDİ*/
+  List<Account> Acclist=[SELECT Id, Name FROM Account ORDER BY Name];
+    for(Account accloop:Acclist){
+         System.debug(Accloop.Name);  
+    } // bu şekilde for döngüsü yaptıgımızda get() modülüne gerek yok.
+    
