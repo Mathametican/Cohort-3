@@ -25,3 +25,11 @@ update Acclist;
 update Acclist;
         Acclist.get(6).Name='Limitation of national resourses';
 update Acclist;
+SELECT Id, Name FROM Account ORDER BY CreatedDate Desc LIMIT 5
+
+Bu Query kod ile en son oluşturulan 5 taneyi çagırdık.
+SELECT Account.Name, Id, Name FROM Contact Order by Account.name
+CHILD TO PARENT
+SELECT Id, Name, (Select Name from contacts )FROM Account
+Parent to child 
+Contacts s takısı aldı.
