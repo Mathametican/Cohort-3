@@ -7,4 +7,21 @@
     for(Account accloop:Acclist){
          System.debug(Accloop.Name);  
     } // bu şekilde for döngüsü yaptıgımızda get() modülüne gerek yok.
-    
+    List<Account> Acclist=[SELECT Id, Name FROM Account ORDER BY Name];
+    for(Account accloop:Acclist){
+        Acclist.get(7).Name='Clarusway';
+update Acclist;
+         System.debug(Accloop.Name);
+         } // Şimdi 7. indeksin nameni değiştireceğiz.
+//Update() modül ile yapacagız. bu bir DML işlemi CRUD
+Acclist.get(7).Name='Clarusway';
+update Acclist;
+// FOR döngüsü dışına yazınca dönmüyor. ama onun süslü 
+//parantezlerine yazınca dönüyor.
+// FOR döngüsü dışına yazınca dönmüyor. ama onun süslü 
+//parantezlerine yazınca dönüyor.
+// for döngüsü içinde yapınca DML döngüsü 2 yerine 26 gösterdi.
+ Acclist.get(5).Name='Triforcia';
+update Acclist;
+        Acclist.get(6).Name='Limitation of national resourses';
+update Acclist;
