@@ -1,3 +1,5 @@
 Bu ne dünya kardeşim. hey hayat nasılsın.
 gel gel
 gel
+
+SELECT Id, Name FROM Account ORDER BY Name
