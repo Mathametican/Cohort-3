@@ -52,4 +52,13 @@ List<Account> updatelist=[SELECT Id, Name FROM Account WHERE Name LIKE '%Company
 List<Account> guncellist=New List<Account>();// bu liste gücellenenleri tutacak
 for(Account upd:updatelist){      // for döngüsü ile listedeki verileri ayrı ayrı 
     System.debug(upd);            // getirdik.
-}
+}// update yapabilmesi için öncesinde bir veri çağırmalıyız.
+List<Account> updatelist=[SELECT Id, Name,Site FROM Account WHERE Name LIKE '%Company%'];
+                               // Yukarda update edilecekleri Liste olarak çagırdık.
+List<Account> guncellist=New List<Account>();// bu liste gücellenenleri tutacak
+for(Account upd:updatelist){      // for döngüsü ile listedeki verileri ayrı ayrı getirdik
+    upd.Site='www.info.com';      // Burada upd nin site nı 'www.info.com' olarak tutmasını istedik
+    guncellist.add(upd);          // burada döngü içerisinde her seferinde guncellist e bunu eklemesini istedik
+    }
+update guncellist;                // burada update ettik.
+System.debug(guncellist);         // ben görmek için yaptım.
