@@ -43,3 +43,13 @@ Account x= New Account();                        // x ile account verilerine ula
 }
 }
 // yukarıda metod tanımladık ve metodun nasıl çalışacağını belirttik.
+public static integer topla(integer s, integer d){       // burada void olmayan integer cıktılı bir iki parametreli metod tanımladık 
+    return s+d;                                        // bundan dolayı return ile çagırıyoruz.
+}
+// update yapabilmesi için öncesinde bir veri çağırmalıyız.
+List<Account> updatelist=[SELECT Id, Name FROM Account WHERE Name LIKE '%Company%'];
+                               // Yukarda update edilecekleri Liste olarak çagırdık.
+List<Account> guncellist=New List<Account>();// bu liste gücellenenleri tutacak
+for(Account upd:updatelist){      // for döngüsü ile listedeki verileri ayrı ayrı 
+    System.debug(upd);            // getirdik.
+}
