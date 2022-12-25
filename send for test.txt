@@ -33,3 +33,13 @@ CHILD TO PARENT
 SELECT Id, Name, (Select Name from contacts )FROM Account
 Parent to child 
 Contacts s takısı aldı.
+public class InsertAccount {        // public static ile çağrılma şeklini belirliyoruz. void ise ne olarak çıkacagını gösteriyor eger çagrılan yere 
+                                              // bir veri girilmeyecekse void türüne göre string Integer Double Decimal
+    public static void Ekle(string a){       // a değişkeni string data type tutuyor.oraya ne yazılacaksa onu String tipinde yazacağız.
+Account x= New Account();                        // x ile account verilerine ulaşmaya çalışıyoruz.
+        x.Name=a;                                // burada x in Name ni a ya eşitle
+        insert x; 
+    
+}
+}
+// yukarıda metod tanımladık ve metodun nasıl çalışacağını belirttik.
