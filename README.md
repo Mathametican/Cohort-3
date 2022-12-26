@@ -212,3 +212,14 @@ public class Cars {
     }
     
 }
+public class MathC {
+    public static void minimum(integer a,integer b,integer c){
+        if(a<Math.min(b,c)){
+            System.debug(a);
+            
+    } else {
+        System.debug(Math.min(b,c));
+       
+    }
+    }
+}  
