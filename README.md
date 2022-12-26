@@ -57,3 +57,81 @@ public class PerimeterCalculation {
 
 
 }
+public class Cars {
+    //Properties
+    private Integer model;                       // private olunca METOD ile bilgi girişi yapıyoruz.
+    private String  color;
+    private String  packet;
+    private Integer maxSpeed;
+    private Integer speed;
+    private Integer brake=0;                     // Burada variable/ propertieslere default bir deger atandı. Durgunken ki araba hızı fren gibi
+    
+    //Setter Metod                               // Private olduğu için sistemde bu variable/properties lere bilgi girişini 
+    public void setModel(Integer model){         // SETTER METOD ile yapacağız.   metod ismi SET ile başkamak zorunda değil sadece hatırlatıcı
+       this.model=model;                         //olsun diye öyle yaptık.
+    }                                            // Private olan model variable na this. ön eki ekleyip model olarak tanımladığımız setter Motod a 
+                                                 // eşitledik.
+    public void setColor(String color){
+        this.color=color;
+    }
+    public void setpacket(String packet){
+        this.packet=packet;
+        
+    }
+    public void setMaxSpeed(Integer maxSpeed){
+        this.maxSpeed=maxSpeed;
+    }
+    public void setspeed(Integer speed){
+        this.speed=speed;
+    }
+    public void setbrake(Integer brake){
+        this.brake=brake;
+    }
+    // Getter Metod
+    public Integer getModel(){                     // Adı üstünde bir şey döndüreceği için bunu void değil Integer bir type ile tanımladık
+        return model;                              // ne getireceği belli olduğu için () parametre tanımlamadık 
+    }                                              // Type Integer bundan dolayı RETURN dedik.
+    public String getColor(){
+        return color;
+    }
+    public String getPacket(){
+        return packet;
+    }
+    public Integer getMaxSpeed(){
+        return maxSpeed;
+    }
+    public Integer getspeed(){
+        return speed;
+    }
+    public Integer getBrake(){
+        return brake;
+    }
+    public void run(){                                         // run metodu tanımladık araba çalıştı.                  
+        System.debug('The vehicle is running');
+    }
+    public void stop(){                                        // stop metodu tanımladık araba durdu.
+        system.debug('The vehicle is stopped');
+    }
+    public Integer acceleration(Integer accelerate){           // accelaration metod tanımladık hız için;
+        speed = accelerate + speed;                            // speed i burada yeniden tanımladık bu Metod için
+        // buda aynı şey 
+        // speed +=accelerate
+        if(speed<maxSpeed){                                   // burayada speed maxSpeed geçemez diye IF ile şart koştuk.
+            System.debug('Current Speed  '+speed);
+        }else{
+            System.debug('Curent Speed  '+maxSpeed);
+        }                                     
+        return speed;
+    }
+    public Integer brake (Integer brake){                    // burada frene basma için Metod tanımladık.
+        speed = speed - brake;                               // burada speed i bu metod için yeniden tanımladık.                            
+        if(speed>0){
+            System.debug('Current Speed  '+speed);
+        }else{
+           // şöylede yapabilirdik. speed=0 system.debug('Current Speed  '+speed); 
+            System.debug('Current Speed  =0 ');
+        }
+        return speed; 
+    }
+    
+}
