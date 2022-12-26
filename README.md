@@ -19,3 +19,11 @@ for(Account y:mylist){                               // bunu if else ile yapaca�
     }
 }                                                    // sonrada bu listeyi sileceğiz
 delete a; 
+List<Account> IsdltdList=[SELECT Id, Name, IsDeleted FROM Account WHERE  Name LIKE '%Company%' All Rows];
+// All ROWS kodunu ekleyerek silen verileri de getiriyoruz.
+List<Account> a=New List<Account>();                         // silinen verileri bu listeye if koşulu ile ekliyoruz 
+for(Account x:Isdltdlist){                                   // For döngüsü ile Isdltdlist teki verileri tek tek 
+    if(x.Isdeleted==True){                                   // kontrol ediyor If ile oluşturulan şartları sağlarsa
+        a.add(x);                                            // a listesine ekleniyor. Amaç DML loop içinde kullanmamak
+    }  
+}  undelete a;                                              // Undelete ilede daha önceden sildiğim verileri geri getirdim. 
