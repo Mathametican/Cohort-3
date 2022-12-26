@@ -27,3 +27,18 @@ for(Account x:Isdltdlist){                                   // For döngüsü i
         a.add(x);                                            // a listesine ekleniyor. Amaç DML loop içinde kullanmamak
     }  
 }  undelete a;                                              // Undelete ilede daha önceden sildiğim verileri geri getirdim. 
+public class PerimeterCalculation {
+  Public static Integer perimeter;                                      // çevre hesabı yapacak bir değişken tanımlandı.Variable Properties
+    Public static Integer perCalc(Integer a, Integer b, Integer c){     // bu variable için bir METOD tanımlıyoruz.// Integer type RETURN gerekli
+          perimeter= a+b+c;                                             // METOD İÇİNDE tanımladıklarımız parametre
+          System.debug('Perimeter of Triangle   '+perimeter);           // Burada Class içinde System.debug tanımladık CODE kımında 
+          return perimeter;                                             //yazmaya gerek olmasın
+          }                                                          
+    Public static Integer PerCalc(Integer a, Integer b, Integer c, Integer d){  // Aynı isimle farklı body de Metod TANIMLADIK üçlü mü dörtlümü
+        perimeter=a+b+c+d;                                                      // o ayırabilecek.
+        System.debug('Perimeter of Rectangle   '+perimeter);
+        return perimeter;
+    }
+
+
+}
