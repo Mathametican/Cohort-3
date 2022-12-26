@@ -42,3 +42,18 @@ public class PerimeterCalculation {
 
 
 }
+public class PerimeterCalculation {
+  Public  Integer perimeter;                                          // Değişken STATIC se METOD da STATIC olmalı 
+    Public  Integer perCalc(Integer a, Integer b, Integer c){         // Değişken NON-STATIC ise METOD da NON-STATIC olmalı
+          perimeter= a+b+c;                                            
+          System.debug('Perimeter of Triangle   '+perimeter);          
+          return perimeter;                                            
+          }                                                          
+    Public  Integer PerCalc(Integer a, Integer b, Integer c, Integer d){  
+        perimeter=a+b+c+d;                                                      
+        System.debug('Perimeter of Rectangle   '+perimeter);
+        return perimeter;
+    }
+
+
+}
