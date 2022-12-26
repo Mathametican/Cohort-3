@@ -223,3 +223,21 @@ public class MathC {
     }
     }
 }  
+public class MathC {
+public static integer x;
+public static Double sayi;
+public static Double gelen(){
+ sayi = Math.random()*100;
+  x=Integer.ValueOf(sayi);
+   System.debug(x);
+   return x;
+   }
+    public static void Tahmin(Integer y){
+    if(x==y){
+             System.debug('Tahmininiz Doğru Kazandınız.');
+    }else if(y<0||y>100){
+             System.debug('Lütfen 0 ile 100 arasında bir sayı giriniz.');
+    }else{
+    System.debug('Tekrar deneyiniz. Bilgisayarın tutugu sayı   :'+x);
+                    }
+}
