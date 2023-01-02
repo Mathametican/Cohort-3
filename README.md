@@ -255,3 +255,20 @@ Opportunity opp2=New Opportunity(
    );
 List<Opportunity> opplist=New List<Opportunity>{opp1,opp2};
 insert opplist;
+Opportunity opp1 = New Opportunity(
+    Name = 'New Opportunity Apex Hours 0213',
+    Amount= 5000,
+    CloseDate=date.today(),
+    StageName='Prospecting'
+   );
+Opportunity opp2=New Opportunity(
+    Name = 'New Opportunity Apex Hours 0223',
+    Amount= 3000,
+    CloseDate=date.today(),
+    StageName='Prospecting'
+   );
+List<Opportunity> opplist=New List<Opportunity>{opp1,opp2};
+    Database.SaveResult[] sr = database.insert(opplist,false);
+for(database.SaveResult var : sr){
+   System.debug('Result : '+var.isSuccess()) ;
+}
