@@ -241,3 +241,17 @@ public static Double gelen(){
     System.debug('Tekrar deneyiniz. Bilgisayarın tutugu sayı   :'+x);
                     }
 }
+Opportunity opp1 = New Opportunity(
+    Name = 'New Opportunity Apex Hours 0213',
+    Amount= 5000,
+    CloseDate=date.today(),
+    StageName='Prospecting'
+   );
+Opportunity opp2=New Opportunity(
+    Name = 'New Opportunity Apex Hours 0223',
+    Amount= 3000,
+    CloseDate=date.today(),
+    StageName='Prospecting'
+   );
+List<Opportunity> opplist=New List<Opportunity>{opp1,opp2};
+insert opplist;
