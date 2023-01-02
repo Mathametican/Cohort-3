@@ -271,4 +271,13 @@ List<Opportunity> opplist=New List<Opportunity>{opp1,opp2};
     Database.SaveResult[] sr = database.insert(opplist,false);
 for(database.SaveResult var : sr){
    System.debug('Result : '+var.isSuccess()) ;
-}
+}Account Acc = New Account(
+   Name= 'Test Account 0213'
+);
+   insert Acc;
+Account accQuery = [SELECT Id FROM Account WHERE Name ='Test Account 0213'];
+System.debug('------'+accQuery);
+Contact con = New Contact(
+  LastName= 'Contact'      
+);
+insert con;
