@@ -281,3 +281,21 @@ Contact con = New Contact(
   LastName= 'Contact'      
 );
 insert con;
+
+Account Acc = New Account(
+   Name= 'Test Account 0213'
+);
+   insert Acc;
+Account accQuery = [SELECT Id FROM Account WHERE Name ='Test Account 0213'];
+System.debug('------'+accQuery);
+
+System.SavePoint svp = Database.setSavePoint();
+
+try{
+    Contact con = New Contact(
+  LastName= 'Contact'      
+);
+    insert con;
+}catch(Exception ex){
+    Database.rollback(svp);
+}
