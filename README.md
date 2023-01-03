@@ -316,3 +316,18 @@ public class Kitap {
         insert z;
     }
 }
+
+LIST<LIST<SObject>> x=[FIND ' de' IN Name FIELDS 
+                       RETURNING Account, Contact, Opportunity]; 
+
+for(integer i=0; i<x.size();i++){
+   System.debug(x); 
+}
+
+LIST<LIST<SObject>> y=[FIND 'ab' IN Name FIELDS 
+                       RETURNING kitap__c, yazar__c, yay_nevi__c]; 
+
+for(integer i=0; i<y.size();i++){
+   System.debug(y); 
+}
+
