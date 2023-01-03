@@ -299,3 +299,20 @@ try{
 }catch(Exception ex){
     Database.rollback(svp);
 }
+public class Kitap {
+    public static void Kayit(string a, string b , string k){
+        yay_nevi__c x=New yay_nevi__c();
+        x.Name= a;
+        insert x;
+        
+        yazar__c y=New yazar__c();
+        y.name=b;
+        y.yay_nevi__c=x.Id;
+        insert y;
+        
+        kitap__c z=New kitap__c();
+        z.name=k;
+        z.yazar__c=y.Id;
+        insert z;
+    }
+}
