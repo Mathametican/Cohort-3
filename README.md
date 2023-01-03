@@ -348,3 +348,33 @@ public class StringArrayTest {
         }
     }
 }
+
+List<Account> MultiAcc= New List<Account>();
+for(integer num=0; num<=300; num++){
+    Account singleAcc = New Account();
+    singleAcc.Name='Bulk Acc-APEX'+num;
+    multiAcc.add(singleAcc);
+}
+   
+Account singleAccError = New Account();
+singleAccError.phone= '234 234 234 34';
+multiAcc.add(singleAccError);
+
+//indert multiAcc; Database.insert(multiAcc,true);
+
+//List<Database.SaveResult>
+Database.SaveResult[] srList= Database.insert(multiAcc,false);
+
+for(Database.SaveResult sr:srList){
+    if(sr.isSuccess()){
+//Operation was successfully, so get the ID of the record that was processed
+    System.debug('Successfully inserted account. Account ID  :'+sr.getId());
+    }else{
+// Operation failed, so get all errors
+        for(Database.Error err:sr.getErrors()){
+         System.debug('The following error has occured.');
+         System.debug(err.getStatusCode()+'  :  '+err.getMessage());
+         System.debug('Account fields that affected this error: '+err.getFields());
+        }
+    }
+}
