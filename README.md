@@ -378,3 +378,9 @@ for(Database.SaveResult sr:srList){
         }
     }
 }
+
+Account acct= new Account( name='Acme', phone='(415)555-1212',NumberOfEmployees=100);
+insert acct;
+ID acctId= acct.Id;
+system.debug('ID :'+acctId);
+// burada yeni insert edilen bir record un ID si ni getiriyoruz.
