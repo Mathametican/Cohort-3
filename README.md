@@ -330,4 +330,8 @@ LIST<LIST<SObject>> y=[FIND 'ab' IN Name FIELDS
 for(integer i=0; i<y.size();i++){
    System.debug(y); 
 }
+LIST<LIST<SObject>> x=[FIND ' de' IN Name FIELDS 
+                       RETURNING Account, Contact, Opportunity]; 
 
+System.debug(x.get(0));
+System.debug(x.get(1));
