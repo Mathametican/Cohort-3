@@ -335,3 +335,16 @@ LIST<LIST<SObject>> x=[FIND ' de' IN Name FIELDS
 
 System.debug(x.get(0));
 System.debug(x.get(1));
+
+
+public class StringArrayTest {
+    public static void generateStringArray(integer n){
+               String y='Test';
+        list<String> x= New List<String>();{
+            for(integer i=0; i<n; i++){
+                 x.add(y+i);
+                 }
+            System.debug(x);
+        }
+    }
+}
