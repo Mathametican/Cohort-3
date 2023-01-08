@@ -35,5 +35,10 @@ public class SoqlDmlLesson {
         }
         upsert newaccList;
     }
-    
+     public static void deleteAcc( string find){
+        string search ='%'+find+'%';
+        List<Account> AccList=New List<Account>();
+        AccList=[SELECT Name FROM Account WHERE Name LIKE :Search];
+        delete Acclist;
+    } 
 }
