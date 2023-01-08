@@ -54,3 +54,11 @@ Account masterAcc= [SELECT Id, Name FROM Account WHERE Name ='Alabama LLC1' LIMI
 Account mergeAcc= [SELECT Id, Name FROM Account WHERE Name ='Alabama LLC2' LIMIT 1];
 merge masterAcc mergeAcc;
 }
+// merge işlemi tehlikeli çünkü diğerinin verileri siliniyor ve onu geri getiremiyoruz.
+
+List<Account> masterAcc= [SELECT Id, Name FROM Account WHERE Name LIKE '%Cohort%'];
+List<Account> mergeAcc= [SELECT Id, Name FROM Account WHERE Name LIKE '%Test%'];
+for(Integer i=0; i<=8;i++){
+    merge masterAcc[i] mergeAcc[i];
+}
+// Burada ben liste ile listeyi merge ettim.
