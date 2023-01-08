@@ -23,3 +23,10 @@ public class Lab1 {
 
     Questionuestion 3
 
+list<integer> A= New List<integer>();
+a.add(5);
+a.add(7);
+a.add(8);
+a.add(13);
+System.debug(a[0]);         //listedeki verileri çagırmanın iki farklı yöntemi
+System.debug(a.get(1));
