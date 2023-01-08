@@ -41,4 +41,10 @@ public class SoqlDmlLesson {
         AccList=[SELECT Name FROM Account WHERE Name LIKE :Search];
         delete Acclist;
     } 
+   public static void UndeleteAcc(string find){
+        string search ='%'+find+'%';
+        List<Account> listAcc=New List<Account>();
+        listAcc=[SELECT Name FROM Account WHERE Name LIKE :search ALL ROWS];
+        undelete ListAcc;  // ısdeleted leri geri getir diye birşeye gerek yok zaten UNDELETE diyince ALL ROWS lardan silinmiş olanları getirecek.
+    } 
 }
