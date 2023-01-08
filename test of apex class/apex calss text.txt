@@ -1,0 +1,14 @@
+public class TestDeneme {
+    public static Integer Topla(integer a, integer b){
+        return a+b;
+    }
+    public static integer Sub(integer x, integer y){
+        return x-y;
+    }
+    public static integer Mul(integer x, integer y ){
+        return x*y;
+    }
+    public static decimal Div(decimal a, decimal b){
+        return a/b;
+    }
+    }
