@@ -48,3 +48,8 @@ list<list<SObject>> x=[FIND 'de' IN ALL FIELDS
 for(integer i=0; i<x.size();i++){
     system.debug(x.get(i));
 }
+
+list<list<SObject>> x=[FIND 'de' IN ALL FIELDS 
+                      RETURNING Account(Name),Contact(LastName),Yazar__c(Name)];
+
+    system.debug(x[0][0]); // bu 4*4 luk bir tabloda ilk sol yukarı sıfır sıfır geliyor.
