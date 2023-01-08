@@ -384,3 +384,16 @@ insert acct;
 ID acctId= acct.Id;
 system.debug('ID :'+acctId);
 // burada yeni insert edilen bir record un ID si ni getiriyoruz.
+
+public class Lab1 {
+    public static void LoopKontrol(){
+        integer i;
+        double sum=0.0;
+    for( i=1; i<=10; i++){
+        System.debug(i);
+        sum+=i;
+        }
+    System.debug('Sum :'+sum);
+    }
+
+}
