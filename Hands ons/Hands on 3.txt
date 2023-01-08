@@ -8,5 +8,14 @@ public class SoqlDmlLesson {
         }
         insert accList;
     }
+     public static void changeName(){
+        List<Opportunity> NewOppList= New List<Opportunity>();
+        for(Opportunity opp:[SELECT Id, Name, StageName FROM Opportunity]){
+            if(opp.stageName=='Closed Won'){
+               opp.Name=opp.Name+'_WON';
+               NewOppList.add(opp);
+            }
+        }
+        update NewOppList;
 }
-
+}
