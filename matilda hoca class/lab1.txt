@@ -1,0 +1,25 @@
+Question 1
+
+integer num=10, count ,sum=0;      // count için başlangıç degeri burada verilmedi
+for(count=1; count<=num; ++count){ // count için hem başlangıç hem bitiş degeri tanımlandı.
+    sum+=count;//(sum=sum+count;)    // count type yukarda tanımladıgımız için burada tanımlamadık.
+}
+    System.debug('Sum  :'+sum);
+
+Question 2
+
+public class Lab1 {
+    public static void LoopKontrol(){
+        integer i;
+        double sum=0.0;
+    for( i=1; i<=10; i++){
+        System.debug(i);
+        sum+=i;
+        }
+    System.debug('Sum :'+sum);
+    }
+
+}
+
+    Questionuestion 3
+
