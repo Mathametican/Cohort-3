@@ -18,4 +18,22 @@ public class SoqlDmlLesson {
         }
         update NewOppList;
 }
+ public static void upsertExp(){
+        List<Account> ListAcc= New List<Account>();
+        List<Account> newaccList= New List<Account>();
+        ListAcc=[SELECT Name FROM Account];
+       
+        for(Account acc:ListAcc){
+           acc.Description='Updated with APEX';
+           newaccList.add(acc);
+        }
+        for(Integer i=0; i<=10; i++){
+            Account acc=New Account();
+            acc.Name='TestAcc1'+'-'+i;
+            acc.Description='Created with APEX';
+            NewaccList.add(acc);
+        }
+        upsert newaccList;
+    }
+    
 }
