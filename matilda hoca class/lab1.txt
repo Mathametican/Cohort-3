@@ -38,3 +38,13 @@ while(i<=5){
     System.debug(i);
     i++;
 }
+
+Question 5
+
+I try this while teacher in break out
+
+list<list<SObject>> x=[FIND 'de' IN ALL FIELDS 
+                      RETURNING Account(Name),Contact(LastName),Yazar__c(Name)];
+for(integer i=0; i<x.size();i++){
+    system.debug(x.get(i));
+}
