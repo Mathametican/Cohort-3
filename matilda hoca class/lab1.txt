@@ -30,3 +30,11 @@ a.add(8);
 a.add(13);
 System.debug(a[0]);         //listedeki verileri çagırmanın iki farklı yöntemi
 System.debug(a.get(1));
+
+Question 4
+
+integer i = 1;
+while(i<=5){
+    System.debug(i);
+    i++;
+}
