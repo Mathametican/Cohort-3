@@ -1,0 +1,12 @@
+public class SoqlDmlLesson {
+    public static void createAcc(String accName){
+        List<Account> accList=New List<Account>();
+        for(integer i=1; i<=10; i++){
+            Account acc= New Account();
+            acc.Name=accName+'_'+i;
+            accList.add(acc);
+        }
+        insert accList;
+    }
+}
+
