@@ -53,3 +53,20 @@ list<list<SObject>> x=[FIND 'de' IN ALL FIELDS
                       RETURNING Account(Name),Contact(LastName),Yazar__c(Name)];
 
     system.debug(x[0][0]); // bu 4*4 luk bir tabloda ilk sol yukarı sıfır sıfır geliyor.
+
+    Question 6 and 7
+
+    list<list<SObject>> x=[FIND 'co' IN ALL FIELDS 
+                      RETURNING Account(Name),Contact(LastName),Yazar__c(Name)];
+list<Account> a=x.get(0);
+list<Contact>  c=x.get(1);
+list<Yazar__c>  y=x.get(2);
+for(Account b:a){
+    System.debug(a);
+}   System.debug('🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸');
+for(Contact d:c){
+    System.debug(d);
+}   System.debug('🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒🍒');
+for(Yazar__c z:y){
+    System.debug(z);
+}
