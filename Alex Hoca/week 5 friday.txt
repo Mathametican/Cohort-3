@@ -19,3 +19,16 @@ for(List<SObject> ListOfSObject:searchResult){
     }
 }// Hoca burada for için de for oluşturarak önce list of list of Sobject in;
 // List of SObject ine girdi daha sonra ikinci for döngüsü ile SObject in içine girdi.
+
+//Datatype variable= Exp.  // list of list of list of  böyle devam edebilir.   'united*' gerisini istediğin gibi tamamla
+List<List<SObject>>  searchResult= [FIND 'united*' IN ALL FIELDS    
+                     RETURNING Account(Id, Name, Industry), Contact(Id, Name, AccountId),
+                     Opportunity(Id, Name, AccountId)]; 
+//  System.debug(searchResult);
+for(List<SObject> ListOfSObject:searchResult){
+    //System.debug(search);
+    for(Sobject sobj:ListOfSObject){
+     System.debug(sobj.get('Name'));
+    }
+}// Hoca burada for için de for oluşturarak önce list of list of Sobject in;
+// List of SObject ine girdi daha sonra ikinci for döngüsü ile SObject in içine girdi.
