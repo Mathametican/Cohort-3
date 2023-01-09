@@ -1,0 +1,8 @@
+//Datatype variable= Exp.  // list of list of list of  böyle devam edebilir.
+List<List<SObject>>  searchResult= [FIND 'united*' IN ALL FIELDS    
+                     RETURNING Account(Id, Name, Industry), Contact(Id, Name, AccountId),
+                     Opportunity(Id, Name, AccountId)]; 
+//  System.debug(searchResult);
+for(List<SObject> search:searchResult){
+    System.debug(search);
+}
