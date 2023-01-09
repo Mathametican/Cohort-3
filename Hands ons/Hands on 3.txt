@@ -60,5 +60,18 @@ List<Account> masterAcc= [SELECT Id, Name FROM Account WHERE Name LIKE '%Cohort%
 List<Account> mergeAcc= [SELECT Id, Name FROM Account WHERE Name LIKE '%Test%'];
 for(Integer i=0; i<=8;i++){
     merge masterAcc[i] mergeAcc[i];
+        
+        
+        //undo of Name changing
+    public static void undoChangeName(){
+        List<Opportunity> newoppList= New List<Opportunity>();
+        for(Opportunity opp:[SELECT Id, Name, StageName FROM Opportunity]){
+            if(opp.StageName=='Closed Won'){
+            opp.Name=opp.Name.Remove('_WON');
+            NewoppList.add(opp);
+            }
+        }
+        update newoppList;
 }
 // Burada ben liste ile listeyi merge ettim.
+
