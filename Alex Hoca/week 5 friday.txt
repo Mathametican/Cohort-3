@@ -77,3 +77,28 @@ for(Opportunity loopopp: oppList){
 for(Case loopcase:caseList){
     system.debug(loopcase);
 }
+
+//0018d00000NF67OAAT > Burlington Textiles Corp of America ID ile bunu getireceğiz.
+    //SOQL WHERE ID = '0018d00000NF67OAAT' diyerek getirebiliriz ya 200 olsa limit dolar tek tek yapmak 
+// zorunda kalırız ama bunu MAP Account ile yapmak daha kolay
+// MAP ......
+    
+Map<Id, Account> mapAccount = New Map<Id,Account>([SELECT Id, Name, ParentId, Phone, AccountNumber,
+               Fax,Website, Industry, AnnualRevenue, NumberOfEmployees FROM Account WHERE ParentId = null]); 
+Set<Id> accountIds = mapAccount.keyset();  
+// .keyset(); metod kullanıldığında sadece map deki ID leri getirecek.SET in içine
+for(Id accId: accountIds){                 // burada Set içine ID getirdiğimiz için for döngüsünü ID              
+                                           // için tanımladık.
+Account singleAcc = mapAccount.get(accId); // MAP in içinden bunu çekip getridik. böylece hepsi ile ilgili 
+                                           // verileri getirebiliriz.    
+System.debug(singleAcc.Name);
+System.debug(singleAcc.ParentId);
+System.debug(singleAcc.Phone);
+System.debug(singleAcc.Industry);    
+}
+// burada sadece bir tanesi ile bilgileri getirirken 
+Account singleAcc = mapAccount.get('0018d00000NF67OAAT'); // MAP in içinden bunu çekip getridik.
+System.debug(singleAcc.Name);
+System.debug(singleAcc.ParentId);
+System.debug(singleAcc.Phone);
+System.debug(singleAcc.Industry);
