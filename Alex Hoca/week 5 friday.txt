@@ -102,3 +102,24 @@ System.debug(singleAcc.Name);
 System.debug(singleAcc.ParentId);
 System.debug(singleAcc.Phone);
 System.debug(singleAcc.Industry);
+
+
+Map<Id, Account> mapAccount = New Map<Id,Account>([SELECT Id, Name, ParentId, Phone, AccountNumber,
+               Fax,Website, Industry, AnnualRevenue, NumberOfEmployees FROM Account WHERE ParentId = null]); 
+
+Map<String,Account> nametoAccount = New Map<String,Account>();
+
+Set<Id> accountIds = mapAccount.keyset();
+
+for( Id accId:accountIds){
+    Account singleAccount = mapAccount.get(accId);
+    nametoAccount.put(singleAccount.Name,singleAccount);
+}
+// Yukarda yeni bir map tanımladık ve bu map Name to Account cinsinden olacak ve bu OTOMATIK olmadığı için 
+// Map<String,ACCOUNT> TARZINDA TANIMLADIK sonra set ile oluşturduğumuz döngü ile bilgileri bu 
+//MAP in içine atadık.
+Account CW =nametoAccount.get('Clarusway');
+System.debug(CW.phone);
+Account Edge = nametoAccount.get('Edge Communications');
+System.debug(Edge.phone);
+
