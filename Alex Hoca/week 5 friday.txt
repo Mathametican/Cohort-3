@@ -51,3 +51,29 @@ for(Contact loopcon:contactList){
 for(Opportunity loopopp: oppList){
     system.debug(loopopp.Name);
 }
+
+
+//Datatype variable= Exp.  
+List<List<SObject>>  searchResult= [FIND 'edge' IN ALL FIELDS    
+                     RETURNING Account(Id, Name), Contact(Id, Name, AccountId),
+                     Opportunity(Id, Name, StageName,CreatedDate,Amount),
+                     Case(Id, Reason,Origin)];
+List<Account> accountList = searchResult.get(0);
+List<Contact> contactList = searchResult.get(1);
+List<Opportunity> oppList = searchResult.get(2);
+List<Case>       caseList = searchResult.get(3);
+
+System.debug(accountList);
+
+for(Account loopacc:accountList){
+    system.debug(loopacc.Name);
+}
+for(Contact loopcon:contactList){
+    system.debug(loopcon.Name);
+}
+for(Opportunity loopopp: oppList){
+    system.debug('Name : '+loopopp.Name+' Amount : '+loopopp.Amount);
+}
+for(Case loopcase:caseList){
+    system.debug(loopcase);
+}
