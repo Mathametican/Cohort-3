@@ -123,3 +123,9 @@ System.debug(CW.phone);
 Account Edge = nametoAccount.get('Edge Communications');
 System.debug(Edge.phone);
 
+Map<Id,Contact> mapContact = New Map<Id,Contact>([SELECT Id, Name
+                            FROM Contact WHERE AccountId=:accountIds]);
+for( Contact conId:[SELECT Id, Name FROM Contact WHERE AccountId=:accountIds]){
+    System.debug(conId);
+}
+// bu şekilde de döngü oluşturabiliyoruz ama hoca bunu sevmiyor.
