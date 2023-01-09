@@ -32,3 +32,22 @@ for(List<SObject> ListOfSObject:searchResult){
     }
 }// Hoca burada for için de for oluşturarak önce list of list of Sobject in;
 // List of SObject ine girdi daha sonra ikinci for döngüsü ile SObject in içine girdi.
+//Datatype variable= Exp.  
+List<List<SObject>>  searchResult= [FIND 'edge' IN ALL FIELDS    
+                     RETURNING Account(Id, Name), Contact(Id, Name, AccountId),
+                     Opportunity(Id, Name, StageName,CreatedDate),Case(Id, Reason,Origin)];
+List<Account> accountList = searchResult.get(0);
+List<Contact> contactList = searchResult.get(1);
+List<Opportunity> oppList = searchResult.get(2);
+
+System.debug(accountList);
+
+for(Account loopacc:accountList){
+    system.debug(loopacc.Name);
+}
+for(Contact loopcon:contactList){
+    system.debug(loopcon.Name);
+}
+for(Opportunity loopopp: oppList){
+    system.debug(loopopp.Name);
+}
