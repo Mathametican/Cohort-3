@@ -14,7 +14,7 @@ List<List<SObject>>  searchResult= [FIND 'united*' IN ALL FIELDS
 //  System.debug(searchResult);
 for(List<SObject> ListOfSObject:searchResult){
     //System.debug(search);
-    for(Sobject sobj=ListOfSObject){
+    for(Sobject sobj:ListOfSObject){
      System.debug(sobj);
     }
 }// Hoca burada for için de for oluşturarak önce list of list of Sobject in;
