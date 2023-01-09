@@ -1,0 +1,35 @@
+List<Budget__c> multiBudget= New List<Budget__c>();
+
+List<String> months =New List<String>{'Jaunary','Fabruary','March','April','May',
+    'June','July','August','October','September','November','December'};
+for(integer i=0;i<=11; i++ ){
+    Budget__c singleBudget = New Budget__c();
+    singleBudget.Name=months.get(i)+' '+2022;
+    multiBudget.add(singleBudget);
+    System.debug(SingleBudget);
+}
+ Insert multiBudget;
+
+List<Income__c>  multiIncome  = New List<Income__c>();
+List<Expense__c> multiExpense = New List<Expense__c>();
+
+for(Budget__c loopBudget:multiBudget){
+    Income__c  singleIncome =New Income__c();
+    Expense__c singleExpense=New Expense__c();
+    
+    singleIncome.Budget__c=loopBudget.Id;
+    singleIncome.Value__c =3000;
+    singleIncome.Income_Source__c='Wage';
+    
+    multiIncome.add(singleIncome);
+    System.debug(SingleIncome);
+    
+    singleExpense.Budget__c=loopBudget.Id;
+    singleExpense.Value__c=1500;
+    singleExpense.Expense_Source__c='Credit card';
+    
+    multiExpense.add(singleExpense);
+    system.debug(singleExpense);
+}
+ Insert multiIncome;
+ Insert multiExpense;
