@@ -20,3 +20,37 @@ public class AccountHandlerTest {
         System.assertEquals('Test Account',actual.Name);
     }
 }
+
+BULK Test
+
+public class AccountHandlerBulk {
+    public static void  createCase(List<Account> multiAcct){//bulkification
+        for(Account acc:multiAcct){
+            acc.Name=acc.Name.ToUpperCase();
+        }
+    insert multiAcct;
+    }      
+}
+
+Testing
+
+@isTest
+public class AccountHandlerBulkTest {
+    @isTest  
+    public static void createTest1(){// BULK TEST
+        List<Account> multiAcct= New List<Account>();
+        for(integer i=0; i<200; ++i){
+        Account singleAcct= New Account();
+        singleAcct.Name='Test Acc '+i;
+        multiAcct.add(singleAcct);
+        }
+     AccountHandlerBulk.createCase(multiAcct);
+        List<Account> testAcct=[SELECT Id, Name FROM Account];
+        System.assertEquals(200,testAcct.size());
+    }
+    @isTest
+    public static void createTest2(){// Single test
+    List<Account> multiAcct=New List<Account>();
+    Account SingleAcct= New Account();
+        singleAcct.Name='Test Acc 1';
+        multiAcct.add(singleAcct);
