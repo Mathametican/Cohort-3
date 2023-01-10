@@ -1,0 +1,22 @@
+public class AccountHandler {
+    public static void create(String name){
+        Account newAcct=New Account();
+        newAcct.Name=name;
+        
+        insert newAcct;
+    }
+       
+}
+
+Testing code
+
+@isTest
+public class AccountHandlerTest {
+    @isTest//(SeeAllData=true) bütün CRM kayıtları görülür diğer durumda sadece test verileri görülür.
+    public static void createTest1(){
+        AccountHandler.create('Test Account');
+        Account actual =[SELECT Id, Name FROM Account];
+        System.debug(actual);
+        System.assertEquals('Test Account',actual.Name);
+    }
+}
