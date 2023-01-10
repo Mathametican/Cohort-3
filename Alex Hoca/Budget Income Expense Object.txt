@@ -33,3 +33,15 @@ for(Budget__c loopBudget:multiBudget){
 }
  Insert multiIncome;
  Insert multiExpense;
+
+ List<Expense__c> multiExpense[SELECT Budget__r.Name, Id, Name, Value__c,
+                FROM expense__c WHERE Budget__r.Name LIKE '%2022%' ];
+ 
+ for(Expense__c ex:expense__c){
+    ex.value__c=2000;
+} 
+Update multiExpense;              
+
+ List<Budget__c> multiBudget=[SELECT Id FROM Budget__c WHERE Name
+                            LIKE '%2022%'  ];
+delete multiBudget;
