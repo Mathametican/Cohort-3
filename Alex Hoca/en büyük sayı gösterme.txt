@@ -11,3 +11,17 @@ for(integer i=0;i<x.size();++i){
 } 
 }
 System.debug(y);
+
+List<Integer> x=New List<Integer>();
+for(integer i=0; i<10; i++){
+    Integer r= Integer.ValueOf(Math.Random()*1000);
+    x.add(r);
+}
+System.debug(x);
+Integer y=x.get(0);
+for(integer i=0;i<x.size();++i){
+    if(y<x.get(i)){
+        y=x.get(i);
+}
+} 
+System.debug(y);
