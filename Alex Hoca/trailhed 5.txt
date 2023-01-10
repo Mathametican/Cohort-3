@@ -1,0 +1,6 @@
+Account[] acctWithContacts=[SELECT Name, Phone,(SELECT FirstName,
+                    LastName FROM Contacts) FROM Account WHERE 
+                    Name='SFDC Computing'];
+
+Contact[] con=acctWithContacts[0].Contacts;
+System.debug('Name of first associated contact : '+con[0].FirstName+' ,'+con[0].LastName);
