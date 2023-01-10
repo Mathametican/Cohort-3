@@ -4,3 +4,18 @@ Account[] acctWithContacts=[SELECT Name, Phone,(SELECT FirstName,
 
 Contact[] con=acctWithContacts[0].Contacts;
 System.debug('Name of first associated contact : '+con[0].FirstName+' ,'+con[0].LastName);
+
+
+String soslFindClose='Wingo OR SFDC';
+List<List<SObject>> searchList=[FIND :soslFindClose IN ALL FIELDS RETURNING
+                    Account(Name),Contact(FirstName, LastName,Department)];
+Account[] searchAccount=(Account[])searchList[0];
+Contact[] searchContact=(Contact[])searchList[1];
+System.debug('Found the following accounts.');
+for(Account a:searchAccount){
+    System.debug(a.Name);
+}
+System.debug('Found the following contacts.');
+for(Contact b:searchContact){
+    System.debug(b.FirstName+','+b.LastName);
+}
