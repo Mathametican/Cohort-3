@@ -1,0 +1,41 @@
+public class Calc {
+    public static Integer sum(Integer x, Integer y){
+        return x+y;
+    }
+    public static Integer sub(Integer x, Integer y){
+        return x - y;
+    }
+     public static Integer mul(Integer x, Integer y){
+        return x*y;
+    }
+     public static decimal div(Integer x, Integer y){
+         if(y==0){
+     System.debug('You try to divide by 0');
+       return null ;
+    }else{
+    return x/y;   
+    }
+
+    @isTest
+public class CalcTest {
+    @isTest
+    public static void sumTest(){
+        Integer actual = Calc.sum(10,10);//10+10=20
+        System.assertEquals(20,actual);
+    }
+    @isTest
+    public static void subTest(){
+        Integer actual = Calc.sub(25,30);//25-30=-5
+        System.assertEquals(-5,actual);
+    }
+    @isTest
+    public static void mulTest(){
+        Integer actual = Calc.mul(12,15);//180
+        System.assertEquals(180,actual);
+    }
+    @isTest
+    public static void divTest(){
+        Decimal actual =Calc.div(12,0);//
+        System.assertEquals( null ,actual);
+    }
+}
