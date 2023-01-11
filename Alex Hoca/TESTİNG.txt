@@ -1,13 +1,19 @@
 public class AccountHandlerBulk {
-    public static void addStudenttoCohort(String CohortName,List<Contact> multiContact){
+    public static boolean addStudenttoCohort(String CohortName,List<Contact> multiContact){
         Account singleAccount= New Account();
         singleAccount.Name=CohortName;
         insert singleAccount;
         
         for(Contact loopcontact:multicontact){
             loopcontact.AccountId=singleAccount.Id;
+            if(loopContact.LastName==null || loopContact.LastName==''){
+                //throw error
+                return false;
+            }
+                
         }
         upsert multiContact;
+        return true;
     }
 }
 
