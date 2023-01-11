@@ -1,0 +1,101 @@
+public class AccountHandlerBulk {
+    public static boolean addStudenttoCohort(String CohortName,List<Contact> multiContact){
+        if(cohortName==null || cohortName==''){
+        return false;
+        }
+        for(Contact loopcontact:multicontact){
+            if(loopContact.LastName==null || loopContact.LastName==''){
+                //throw error
+                return false;
+            }
+        }
+        Account singleAccount= New Account();
+        singleAccount.Name=CohortName;
+        insert singleAccount;
+        
+        for(Contact loopcontact:multicontact){
+            loopcontact.AccountId=singleAccount.Id;
+        }
+        upsert multiContact;
+        return true;
+    }
+    public static void createToUpperCase(List<Account> multiAcc){// Bulkification
+        for(Account Acc:multiAcc){
+            acc.Name=acc.Name.toUpperCase();
+        }
+        insert multiAcc;
+    }
+}
+
+TESTING CODES
+
+@isTest
+public class AccountHandlerBulkTest {
+    @isTest  
+    public static void addStudenttoCohort1(){
+//prepare data
+    List<Contact> multiContact = New List<Contact>();// positive Behavior //Single Account //MultiAccount
+        for(Integer num=1;num<=200;num++){
+         Contact SingleContact=New Contact();
+         singleContact.FirstName='TEST ' +num;
+         singleContact.LastName= 'Student '+num;
+         multiContact.add(singleContact);
+        }
+      Boolean result = AccountHandlerBulk.addStudenttoCohort('TEST COHORT',multiContact);
+        List<Contact> actual=[SELECT Id, Name, AccountId, Account.Name FROM Contact];
+        Account singleAcc= [SELECT Id, Name FROM Account LIMIT 1];
+        
+        System.assertEquals(true,result);
+        System.assertEquals(200,actual.size());
+        System.assertNotEquals(null,actual.get(0).AccountId);// Test 1 Student 1
+        System.AssertEquals(SingleAcc.Id,actual.get(0).AccountId);
+        System.assertEquals('TEST COHORT',singleAcc.Name);
+    }
+    @isTest
+    public static void addstudenttoCohort2(){//negative behavior
+        List<Contact> multiContact=New List<Contact>();
+        for(Integer num=1; num<=200; num++){
+            Contact singleContact= New Contact();
+            singleContact.FirstName='TEST '+num;
+            multiContact.add(singleContact);
+            
+        }
+    Boolean result = AccountHandlerBulk.addStudenttoCohort('TEST COHORT', multiContact);
+    
+    List<Contact> actual=[SELECT Id , Name, AccountId, Account.Name FROM Contact];
+    List<Account> singleAcc=[SELECT Id, Name FROM Account LIMIT 1];
+   
+    System.debug(actual);
+    System.debug(singleAcc);
+        
+    System.assertEquals(false, result);
+    System.AssertEquals(0,singleAcc.size());
+    System.assertEquals(0,actual.size());
+    }
+    @isTest
+    public static void createtest1(){
+    List<Account> multiAcc=New List<Account>();
+        for(Integer x=1; x<=200; x++){
+        Account singleAcc= New Account();
+        SingleAcc.Name='Test Acc '+x;
+        multiAcc.add(SingleAcc);
+        }
+    AccountHandlerBulk.createToUpperCase(multiAcc);
+    List<Account> actual=[SELECT Id, Name FROM Account];
+    
+    System.assertEquals(200,actual.size());
+    }
+    @isTest
+    public static void createtest2(){
+    List<Account> multiAcc=New List<Account>();
+    Account singleAcc=New Account();
+    SingleAcc.Name='Test Acc 1';
+     
+    multiAcc.add(singleAcc);    
+    
+    AccountHandlerBulk.createToUpperCase(multiAcc);
+    List<Account> actual=[SELECT Id, Name FROM Account];
+    
+    System.assertEquals(1,actual.size());
+}
+}
