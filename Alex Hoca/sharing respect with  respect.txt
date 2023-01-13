@@ -1,0 +1,33 @@
+public with sharing AccountHandlerBulk { // with sharing ile apex class respect sharing rule
+    public static boolean addStudenttoCohort(String CohortName,List<Contact> multiContact){
+        if(cohortName==null || cohortName==''){
+        return false;
+        }
+        for(Contact loopcontact:multicontact){
+            if(loopContact.LastName==null || loopContact.LastName==''){
+                //throw error
+                return false;
+            }
+        }
+        Account singleAccount= New Account();
+        singleAccount.Name=CohortName;
+        
+        // Account(OLS Object Level Security)   FLS(Field Level Security)  Account.Name
+        
+        insert singleAccount;
+        
+        for(Contact loopcontact:multicontact){
+            loopcontact.AccountId=singleAccount.Id;
+        }
+        
+        //OLS Contact -FLS FristName LastName Email Phone
+        upsert multiContact;
+        return true;
+    }
+    public static void createToUpperCase(List<Account> multiAcc){// Bulkification
+        for(Account Acc:multiAcc){
+            acc.Name=acc.Name.toUpperCase();
+        }
+        insert multiAcc;
+    }
+}
