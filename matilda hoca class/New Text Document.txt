@@ -29,3 +29,14 @@ for(integer i=1; i<x.size();i++){
     }
 }
 System.debug('The Minimum number in the list is:  '+y);
+
+
+List<Student__c> x= New List<Student__c>();
+List<String>  name= New List<String>{'Ali','Ahmet','Mina','Ayşe','Hatice'};
+    for(integer i=0; i<name.size();++i){
+        Student__c y=New Student__c();
+        y.Name=name.get(i);
+        x.add(y);
+    }
+System.debug(x);
+insert x;
