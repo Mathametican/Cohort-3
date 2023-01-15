@@ -5,9 +5,27 @@ x.add(74);
 x.add(3);
 x.add(96);
 integer y=x.get(0);
-for(integer i=0; i<x.size();i++){
+for(integer i=1; i<x.size();i++){
     if(x.get(i)>y){
         y=x.get(i);
     }
 }
-System.debug(y);
+System.debug('The Maximum number in the list is:  '+y);
+
+
+
+
+
+list<Integer> x=New List<Integer>();
+x.add(56);
+x.add(85);
+x.add(74);
+x.add(3);
+x.add(96);
+integer y=x.get(0);
+for(integer i=1; i<x.size();i++){
+    if(x.get(i)<y){
+        y=x.get(i);
+    }
+}
+System.debug('The Minimum number in the list is:  '+y);
