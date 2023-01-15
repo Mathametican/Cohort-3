@@ -40,3 +40,19 @@ List<String>  name= New List<String>{'Ali','Ahmet','Mina','Ayşe','Hatice'};
     }
 System.debug(x);
 insert x;
+
+
+
+With Apex class
+
+public class Record {
+    public static void RecordStudent(string ClsName , String StudName){
+        Class__c c= New Class__c();
+        c.Name=ClsName;
+        insert c;
+        Student__c s=New Student__c();
+        s.Name=StudName;
+        s.Class__c=c.Id;
+        insert s;
+    }
+}
