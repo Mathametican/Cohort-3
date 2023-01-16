@@ -6,3 +6,22 @@ trigger LeadTrigger on Lead (before insert) {
     }
         
     }
+
+    Test of trigger but we do not call trigger apex we just control if apex trigger 
+    run properly or not
+
+    @isTest
+public class LeadtTest {           // Trigger test trigger çağrılmıyor çalışıp çalışmadığı kontrol ediliyor.
+    @isTest
+    public static void leadTest1(){
+        Lead testLead=New Lead();
+        testLead.FirstName='test 1';
+        testLead.LastName='deneme 1';
+        testLead.Company='testCompany 1';
+        insert testLead;
+        
+        Lead result=[SELECT Id, FirstName,LastName,Company FROM Lead];
+        System.debug('Trigger Result : '+result);
+    }
+
+}
