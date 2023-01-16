@@ -1,0 +1,22 @@
+if clause ve .addERROR('MSG') KODU ile yazılıyor.
+
+
+
+trigger LeadTrigger on Lead (before insert) {
+    for(Lead singleLead:Trigger.New){
+       
+       System.debug('Before Update  -------');
+       System.debug(singleLead);
+       singleLead.FirstName= singleLead.FirstName.ToUpperCase();   
+       singleLead.LastName= singleLead.LastName.ToUpperCase();
+       singleLead.Company= singleLead.Company.ToUpperCase();
+       System.debug('After Update  *******');
+       System.debug(singleLead);
+    }
+    //Validation RULE
+    for(Lead snglead:Trigger.New){
+        if(String.isBlank(sngLead.LeadSource)){
+            sngLead.addError('Lead Source filled must bu filled');
+        }
+    }  
+    }
