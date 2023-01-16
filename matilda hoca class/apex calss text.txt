@@ -37,3 +37,39 @@ public class testDenemeTest {
         System.assertEquals(2,s3);
     }
 }
+
+
+
+
+
+public class AcCon {
+    public static void actCont(String Name, String FrstNm, String LstNm){
+        Account acc= New Account();
+        acc.Name= Name;
+        insert acc;
+        Contact con=New Contact();
+        con.FirstName=FrstNm;
+        con.LastName=LstNm;
+        con.AccountId=acc.Id;
+        insert con;
+    }
+
+}
+
+
+@isTest
+public class AcContest2 {
+   @isTest
+    public static void actConttest1(){
+    AcCon.actCont('Dechlon','Samuel','Darkness');
+    Account a=[SELECT Id, Name FROM Account];
+    Contact c=[SELECT Id, FirstName, LastName, AccountId FROM Contact];
+    System.debug(a);
+    System.debug(c);
+    System.assertEquals('Dechlon', a.Name, 'If account name is not Dechlon, Apex class do not work properly');
+    System.assertEquals('Samuel',c.firstName, 'If Contact\'s first name is not Samuel, Apex class do not work properly');
+    System.assertEquals('Darkness',c.LastName,'If Contact\'s last name is not Darkness, Apex class do not work properly');
+    System.assertEquals(a.id,c.AccountId,'If Contact\'s AccoutId is not equal Account Id, Apex class do not work properly');
+
+}
+}
