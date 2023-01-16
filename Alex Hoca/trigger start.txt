@@ -25,3 +25,35 @@ public class LeadtTest {           // Trigger test trigger çağrılmıyor çal�
     }
 
 }
+
+
+test of trigger with TESTSETUP()  METHOD
+
+@isTest
+public class LeadtTest {  
+    @testSetup   //Factory setting is start
+    public static void Setup(){
+        List<Lead> testLeads=New List<Lead>();
+        
+        for(Integer i=1; i<=10; ++i){
+            Lead sLead=New Lead();
+            sLead.FirstName='test '+i;
+            sLead.LastName='deneme '+i;
+            sLead.Company='Test Company '+i;
+            testLeads.add(sLead);
+        }
+        insert testLeads;
+    }  // Factory settings finish
+    
+    @isTest    //-------------------------------------Test 1 is start
+   
+    public static void leadTest1(){
+   Integer i=1;   
+   List<Lead> results=[SELECT Id, FirstName,LastName,Company FROM Lead];
+   System.debug('Test Trigger Result :'+results);
+        for(Lead result:results){
+   System.debug('Trigger Result  '+i+' :'+result);
+        i++;    
+    }
+    }         //-------------------------------------Test 1 is finish
+}
