@@ -1,0 +1,38 @@
+TEST METHOD OF CUSTOM METHODS
+
+public class BookC {
+    public static void Kayit(String athr, List<String> bks){
+        Author__c a= New Author__c();
+        a.Name=athr;
+        insert a;
+     
+    List<Book__c> multib=New List<Book__c>();
+    for(integer i=0;i<bks.size();++i){
+        Book__c b=New Book__c();
+        b.Name=bks.get(i);
+        b.Author__c=a.id;
+        multib.add(b);
+    }
+        
+       insert multib;
+}
+}
+
+
+
+@isTest
+public class BookCTest {
+    @isTest
+    public static void KayitTest(){
+        List<string> a=New List<String>();
+        for(integer j=1; j<60; j++){
+            a.add('Kitap '+j);
+        }
+        BookC.Kayit('Yazar__1',a);
+        Author__c b=[SELECT Id, Name FROM Author__c];
+        System.debug(b);
+        List<Book__c> c=[SELECT Id, Name, Author__r.Id FROM Book__c];
+        System.debug(c);
+    }
+
+}
