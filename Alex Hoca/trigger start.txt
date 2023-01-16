@@ -57,3 +57,50 @@ public class LeadtTest {
     }
     }         //-------------------------------------Test 1 is finish
 }
+
+
+
+@isTest
+public class LeadtTest {  
+    @testSetup   //Factory setting is start
+    public static void Setup(){
+        List<Lead> testLeads=New List<Lead>();
+        
+        for(Integer i=1; i<=10; ++i){
+            Lead sLead=New Lead();
+            sLead.FirstName='test '+i;
+            sLead.LastName='deneme '+i;
+            sLead.Company='Test Company '+i;
+            testLeads.add(sLead);
+        }
+        insert testLeads;
+    }  // Factory settings finish
+    
+       @isTest        //---------------------------------Test 1 start
+    public static void Leadtest1(){
+        List<Lead> results=[SELECT Id, FirstName,LastName,Company FROM Lead];
+        delete results;
+        System.debug(results.size());
+        List<Lead> results1=[SELECT Id, FirstName,LastName,Company FROM Lead];
+        System.debug(results1);
+           System.debug(results1.size());
+    }             // --------------------------------Test 1 finish
+    
+    
+    @isTest    //-------------------------------------Test 2 is start
+   
+    public static void leadTest2(){
+   Integer i=1;   
+   List<Lead> results=[SELECT Id, FirstName,LastName,Company FROM Lead];
+   System.debug('Test Trigger Result :'+results);
+
+        for(Lead result:results){
+   System.debug('Trigger Result  '+i+' :'+result);
+        i++;    
+    }
+    }         //-------------------------------------Test 2 is finish
+    
+    
+
+    
+}
