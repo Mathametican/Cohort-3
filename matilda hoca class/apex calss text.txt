@@ -73,3 +73,27 @@ public class AcContest2 {
 
 }
 }
+
+
+
+
+IN TEST CLASS TEST.STARTTEST()     TEST.STOPTEST()  METOD
+
+@isTest
+public class AcContest2 {
+   @isTest
+    public static void actConttest1(){
+    AcCon.actCont('Dechlon','Samuel','Darkness');
+    Test.startTest();
+    Account a=[SELECT Id, Name FROM Account];
+    Contact c=[SELECT Id, FirstName, LastName, AccountId FROM Contact];
+    Test.stopTest();           //Test.startTest()  ve Test.stopTest()   hazır metodları ile Goverment LIMIT lerin aşmasını engelli yoruz.
+                               // bunu yazmasak testclass ve asıl class daki DML leri bir sayıyor ve 4 e çıkıyor.
+    System.debug(a);           // Ama bu şekilde sadece asıl class için DML döndürüyor Test class için döndürmüyor.AMAÇ LIMIT LERİ AŞMAMAK
+    System.debug(c);
+    System.assertEquals('Dechlon', a.Name, 'If account name is not Dechlon, Apex class do not work properly');
+    System.assertEquals('Samuel',c.firstName, 'If Contact\'s first name is not Samuel, Apex class do not work properly');
+    System.assertEquals('Darkness',c.LastName,'If Contact\'s last name is not Darkness, Apex class do not work properly');
+    System.assertEquals(a.id,c.AccountId,'If Contact\'s AccoutId is not equal Account Id, Apex class do not work properly');
+
+}
