@@ -1,0 +1,41 @@
+trigger AccountDeletion on Account (before insert) {
+       for(Account a:[SELECT Id FROM Account WHERE 
+           Id IN (SELECT AccountId FROM Opportunity) 
+                      AND Id IN :Trigger.old]){
+                      
+       trigger.oldMap.get(a.Id).addError('Cannot delete account with related opportunities');
+                          
+                      }
+}
+
+
+
+Test class
+
+@isTest
+public class TestAccountDeletion {
+    @isTest
+    static void TestDeleteAccountWithOneOpportunity(){
+    Account acct= New Account( Name = 'Test Account');
+        
+        insert acct;
+        
+    Opportunity opp= New Opportunity( Name =acct.Name+' Opportunity',
+                                      StageName= 'Prospecting',
+                                      CloseDate=System.today().addMonths(1),
+                                      AccountId=acct.Id);
+        
+        insert opp;
+        
+     Test.startTest();
+     Database.DeleteResult result= Database.Delete(acct,false);
+     Test.stopTest();
+        
+     System.assert(!result.isSuccess());
+     System.assert(result.getErrors().size()>0);
+     System.assertEquals('Cannot delete account with related opportunities',result.getErrors()[0].getMessage());
+        
+        
+    }
+
+}
