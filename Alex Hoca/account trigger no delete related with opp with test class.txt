@@ -39,3 +39,12 @@ public class TestAccountDeletion {
     }
 
 }
+
+
+trigger Merhaba on Account (before insert,after insert) {
+    /*for(Account y:Trigger.New){
+     y.Name=y.Name.toUpperCase();
+     y.Description='Deneme Acıklama';
+    }*/
+    System.debug('Trigger is working  '+Trigger.OperationType);
+}
