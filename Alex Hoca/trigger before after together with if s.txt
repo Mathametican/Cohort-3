@@ -1,0 +1,18 @@
+trigger LeadofTrigger on Lead (before insert,before update, before delete,
+                               after insert, after update,after delete, after undelete) {
+        System.debug('LeadofTrigger is working   '+Trigger.OperationType);
+        if(trigger.isBefore){
+                  if(trigger.isInsert){
+                  }else if(trigger.isUpdate){
+                  }else if(trigger.isdelete){
+                  }
+        }
+        
+        if(trigger.isAfter){
+                  if(trigger.isInsert){
+                  }else if(trigger.isUpdate){
+                  }else if(trigger.isdelete){
+                  }else if(trigger.isundelete){
+                  }    
+        }
+}
