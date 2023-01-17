@@ -1,0 +1,81 @@
+trigger LeadofTrigger on Lead (before insert,before update, before delete,
+                               after insert, after update,after delete, after undelete) {
+        //System.debug('LeadofTrigger is working   '+Trigger.OperationType);
+                                   switch on Trigger.OperationType{          // TRIGGER BAŞLANGIÇ ŞABLONU
+                                       //Field update/Validation Rule
+                             WHEN BEFORE_INSERT{}
+                             WHEN BEFORE_UPDATE{}
+                             WHEN BEFORE_DELETE{}
+                                       
+                             //Record Id.......Relation...
+                             WHEN AFTER_INSERT{
+                            //Bulkification........Trigger.new=ListOfLead
+                                  List<Task> multiTask=New List<Task>();
+                                  for(Lead singleLead:trigger.new){
+                                      if(/*singlelead.phone==null || singlelead.phone==''*/ String.isBlank(singleLead.phone)){
+                                          Task singleTask = New Task();
+                                          singleTask.Subject='Update Phone Number';
+                                          singleTask.ActivityDate=date.Today()+10;
+                                          singleTask.WhoId=singleLead.Id;            // bu işlem sadece AFTER TRIGGER dan önce yapılabilir çünkü 
+                                          singleTask.OwnerId=SingleLead.OwnerId;     // öncesinde ID oluşmaz.
+                                          singleTask.status='Not Started';
+                                          singleTask.IsReminderSet=True;
+                                          singleTask.ReminderDateTime=Date.today();
+                                   multiTask.add(singleTask);       
+                                               }
+                                           }
+                                      insert multiTask;
+                                       }
+                            WHEN AFTER_UPDATE{}
+                            WHEN AFTER_DELETE{}
+                            WHEN AFTER_UNDELETE{}
+                                   }   
+
+
+
+@isTest
+public class TestLEadOfTrigger {
+    @testSetup
+    public static void setup(){
+    List<Lead> testLeads= New List<Lead>();
+    for(Integer i=1; i<=100;++i){
+        Lead nLead= New Lead();
+        nLead.firstname='Test '+i;
+        nLead.lastName='Deneme '+i;
+        nLead.Company='TestCompany '+i;
+     testLeads.add(nLead);
+    }
+    insert testLeads;
+    
+     List<Lead> ptestLeads= New List<Lead>();
+    for(Integer i=1; i<=100;++i){
+        Lead nLead= New Lead();
+        nLead.firstname='Test '+i;
+        nLead.lastName='Deneme '+i;
+        nLead.Company='TestCompany '+i;
+        nLead.Phone='123 456 45 56';
+     ptestLeads.add(nLead);
+    }
+     insert ptestLeads;   
+    }
+    
+    @isTest
+    public static void noPhoneLeadTask(){
+        
+        Integer CountTask=0;
+        List<Lead> noyesPhone= [SELECT Id, FirstName, LastName, Phone, Company,
+                            (SELECT Id, Status, Subject, ActivityDate, OwnerId, WhoId, 
+                            IsReminderSet, ReminderDateTime FROM Tasks) FROM Lead];
+        
+        for(Lead gLead:noyesPhone){
+            if(gLead.tasks.size()!=0){
+                countTask++;}    
+            
+            
+        }
+      System.debug('How Many Task is Created :'+CountTask);
+      System.debug('Total Lead : '+noyesPhone.size());
+      System.AssertEquals(100,CountTask);
+      System.AssertEquals(200,noyesPhone.size());
+    }
+}
