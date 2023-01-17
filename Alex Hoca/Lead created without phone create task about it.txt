@@ -1,0 +1,32 @@
+trigger LeadofTrigger on Lead (before insert,before update, before delete,
+                               after insert, after update,after delete, after undelete) {
+        //System.debug('LeadofTrigger is working   '+Trigger.OperationType);
+                                   switch on Trigger.OperationType{          // TRIGGER BAŞLANGIÇ ŞABLONU
+                                       //Field update/Validation Rule
+                             WHEN BEFORE_INSERT{}
+                             WHEN BEFORE_UPDATE{}
+                             WHEN BEFORE_DELETE{}
+                                       
+                             //Record Id.......Relation...
+                             WHEN AFTER_INSERT{
+                            //Bulkification........Trigger.new=ListOfLead
+                                  List<Task> multiTask=New List<Task>();
+                                  for(Lead singleLead:trigger.new){
+                                      if(/*singlelead.phone==null || singlelead.phone==''*/ String.isBlank(singleLead.phone)){
+                                          Task singleTask = New Task();
+                                          singleTask.Subject='Update Phone Number';
+                                          singleTask.ActivityDate=date.Today()+10;
+                                          singleTask.WhoId=singleLead.Id;            // bu işlem sadece AFTER TRIGGER dan önce yapılabilir çünkü 
+                                          singleTask.OwnerId=SingleLead.OwnerId;     // öncesinde ID oluşmaz.
+                                          singleTask.status='Not Started';
+                                          singleTask.IsReminderSet=True;
+                                   multiTask.add(singleTask);       
+                                               }
+                                           }
+                                      insert multiTask;
+                                       }
+                            WHEN AFTER_UPDATE{}
+                            WHEN AFTER_DELETE{}
+                            WHEN AFTER_UNDELETE{}
+                                   }                               
+}
