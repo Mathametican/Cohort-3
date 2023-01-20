@@ -1,0 +1,23 @@
+trigger LeadTriggerofupdate on Lead (before insert,before update, before delete,
+                               after insert, after update,after delete, after undelete) {
+                         
+                            switch on Trigger.OperationType{
+                                    
+       WHEN AFTER_UPDATE{        if(!checkRecursive.firstCall){// we create this class for use every recusive problem 
+                                                                          checkRecursive.firstCall=true;
+                                                                          Set<Id> setIdOf=New Set<Id>();
+                                                                          for(Lead singleLead:trigger.New){
+                                                                          if(singleLead.Status=='Open - Not Contacted'){
+                                                                          setIdOf.add(singleLead.Id);
+                                                                          } }
+                               List<Lead> multiLead = [SELECT Id, FirstName,LastName, Status FROM Lead WHERE id=:setIdOf ]; 
+                               for(Lead sngLd:multiLead){
+                                   sngLd.status='Working - Contacted';        }
+                                   update multiLead;
+
+
+                                   public class checkRecursive {
+    public static Boolean firstCall=false;
+        
+    }
+    }  }
