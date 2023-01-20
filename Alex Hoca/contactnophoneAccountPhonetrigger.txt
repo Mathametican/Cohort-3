@@ -1,0 +1,18 @@
+trigger ContactTrigger on Contact (before insert) {
+        // contact phone = null > update.
+      
+        Set<Id> accountids = New Set<Id>();
+      
+       for(Contact singleContact:Trigger.New){
+        if(String.isBlank(singleContact.phone)){
+            accountids.add(singleContact.accountid);
+            System.debug(singleContact.accountId);
+        }
+    }
+    Map<Id,Account> MapAccount =New Map<Id,Account>([SELECT Id, Name , Phone FROM Account WHERE Id=:accountids]);
+    System.debug(MapAccount);
+    for(Contact SingleContact:Trigger.New){
+        if(String.isBlank(singleContact.phone)){
+            System.debug(MapAccount.get(singleContact.AccountId));
+            SingleContact.OtherPhone=MapAccount.get(singleContact.AccountId).phone;
+        }
