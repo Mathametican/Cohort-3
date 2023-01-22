@@ -1,0 +1,24 @@
+trigger Merhaba on Account(before insert, after insert, before update,after update,
+                           before delete, after delete, after undelete){
+  if(trigger.isInsert){
+      if(trigger.isBefore){
+          System.debug('Before Insert is Running.');
+      }else{
+          System.debug('After Insert is Running');
+      }
+  }else if(trigger.isUpdate){
+      if(trigger.isBefore){
+          System.debug('Before Update is Running.');
+      }else{
+          System.debug('After Update is Running');
+      }
+  }else if(trigger.isDelete){
+       if(trigger.isBefore){
+          System.debug('Before Delete is Running.');
+      }else{
+          System.debug('After Delete is Running');
+      }
+      
+  }if(trigger.isUndelete){
+      System.debug('After Undelete is running');
+  }
