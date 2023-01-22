@@ -28,3 +28,51 @@ trigger Merhaba on Account(before insert, after insert, before update,after upda
   }
                                
                            }
+
+
+
+
+
+   public class AccountHelper {
+    public static void SimpleInsert(list<Account> x){
+        for(Account a:x){
+              a.site='www.bilgi.com';
+              a.phone='+90 456 34 56';
+              a.Name=a.Name.toUpperCase();
+          } 
+    }
+    public static void ValidationRule(list<Account> y){
+        
+    }
+}
+
+
+
+trigger Merhaba on Account(before insert, after insert, before update,after update,
+                           before delete, after delete, after undelete){
+  if(trigger.isInsert){
+      if(trigger.isBefore){
+          System.debug('Before Insert is Running.');
+          AccountHelper.SimpleInsert(trigger.new);  // Burada Helper Class ı çagırıyoruz.
+      }else{
+          System.debug('After Insert is Running');
+          System.debug(trigger.new);
+      }
+  }else if(trigger.isUpdate){
+      if(trigger.isBefore){
+          System.debug('Before Update is Running.');
+      }else{
+          System.debug('After Update is Running');
+      }
+  }else if(trigger.isDelete){
+       if(trigger.isBefore){
+          System.debug('Before Delete is Running.');
+      }else{
+          System.debug('After Delete is Running');
+      }
+      
+  }if(trigger.isUndelete){
+      System.debug('After Undelete is running');
+  }
+                               
+                           }
