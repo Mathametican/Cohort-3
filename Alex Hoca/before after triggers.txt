@@ -3,8 +3,12 @@ trigger Merhaba on Account(before insert, after insert, before update,after upda
   if(trigger.isInsert){
       if(trigger.isBefore){
           System.debug('Before Insert is Running.');
+          for(Account a:trigger.new){
+              a.site='www.bilgi.com';
+          }
       }else{
           System.debug('After Insert is Running');
+          System.debug(trigger.new);
       }
   }else if(trigger.isUpdate){
       if(trigger.isBefore){
@@ -22,3 +26,5 @@ trigger Merhaba on Account(before insert, after insert, before update,after upda
   }if(trigger.isUndelete){
       System.debug('After Undelete is running');
   }
+                               
+                           }
