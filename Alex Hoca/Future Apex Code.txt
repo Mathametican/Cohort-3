@@ -9,3 +9,26 @@ public class LeadFuture {
         }update multiLead;
         }
 }
+
+
+
+OUEUEABLE
+
+
+public class LeadQueueable Implements Queueable {            //Queueable bir class
+    public void execute (QueueableContext  context){         //QueueableContext tıpkı String gibi bir variable
+        List<Lead> multiLead=[SELECT Id, Name, LeadSource 
+                             FROM Lead WHERE LeadSource='Queueable Source'];
+        for(Lead singleLead:multiLead){
+            singleLead.LeadSource='OTHERS';
+        }
+         update multiLead; 
+    }
+    }    // BUNUN ÇALIŞTIRILMASI FARKLI
+
+
+   QUEUEABLE GİRDİSİ
+
+   LeadQueueable Lq=New LeadQueueable();
+Id Leadjobid = System.enqueueJob(Lq);
+System.debug('JOB ID : '+Leadjobid);
