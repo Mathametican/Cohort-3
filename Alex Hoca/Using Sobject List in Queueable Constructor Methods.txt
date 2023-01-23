@@ -1,0 +1,38 @@
+public class LeadQueueable Implements Queueable {            //Queueable bir class
+    //properties- variables
+    List<Lead> multilead=New List<Lead>();
+    String LeadSource; 
+    //Constructor metod
+    public LeadQueueable(List<Lead>  Leads, String LeadSource){
+    //isimler aynı olduğu için this()metod kullanıyoruz.
+    multiLead=Leads;
+    this.LeadSource=LeadSource;
+    }
+    
+    //Burası Queueable metod  burada variable kullanarak çagırma yapacaksak CONSTRUCTOR metod oluşturmalıyız.
+    public void execute (QueueableContext  context){         //QueueableContext tıpkı String gibi bir variable
+        List<Lead> multiLeads=MultiLead;
+        for(Lead singleLead:multiLead){
+            singleLead.LeadSource=LeadSource;
+        }
+         update multiLeads; 
+    }
+    }    // BUNUN ÇALIŞTIRILMASI FARKLI
+
+
+
+    ENTER CODE KISMI
+
+
+    public class LeadFuture {
+      @future            // @future kodu arka planda çalış komutu veriyoruz bu arada biz başka birşey yapabiliriz.
+                         // @future(callout true ) ile API sorgusu yapılabilir
+    public static void updatePhone(String CompanyName,String Phone){
+        System.debug('Future Metod start.');
+        List<Lead> multiLead=[SELECT Id, FirstName,LastName,Company,Phone FROM Lead WHERE Company=:CompanyName ];
+        for(Lead singleLead:multiLead){
+           
+            singleLead.phone=phone;
+        }update multiLead;
+        }
+}
