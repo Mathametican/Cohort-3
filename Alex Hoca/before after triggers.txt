@@ -1,70 +1,61 @@
-trigger Merhaba on Account(before insert, after insert, before update,after update,
-                           before delete, after delete, after undelete){
-  if(trigger.isInsert){
-      if(trigger.isBefore){
-          System.debug('Before Insert is Running.');
-          for(Account a:trigger.new){
-              a.site='www.bilgi.com';
-          }
-      }else{
-          System.debug('After Insert is Running');
-          System.debug(trigger.new);
-      }
-  }else if(trigger.isUpdate){
-      if(trigger.isBefore){
-          System.debug('Before Update is Running.');
-      }else{
-          System.debug('After Update is Running');
-      }
-  }else if(trigger.isDelete){
-       if(trigger.isBefore){
-          System.debug('Before Delete is Running.');
-      }else{
-          System.debug('After Delete is Running');
-      }
-      
-  }if(trigger.isUndelete){
-      System.debug('After Undelete is running');
-  }
-                               
-                           }
-
-
-
-
-
-   public class AccountHelper {
+public class AccountHelper {
     public static void SimpleInsert(list<Account> x){
         for(Account a:x){
               a.site='www.bilgi.com';
-              a.phone='+90 456 34 56';
+              a.fax='+90 456 34 56';
               a.Name=a.Name.toUpperCase();
           } 
     }
-    public static void ValidationRule(list<Account> y){
-        
+    public static void ValidationRule(list<Account> x){
+        for(Account a:x){
+            if(String.isBlank(a.phone)){
+                a.addError('Phone Number is Required');
+            }
+        }
+    }
+    public static void ContactCreate(List<Account> x){
+        List<Contact> a=New List<Contact>();
+        for(Account y:x){                        //Account kadar(trigger.New) dönüyor ama kontact oluşturuyor.
+        Contact b=New Contact();
+        b.LastName='Helper Contact Test';
+        b.AccountId=y.Id;
+        a.add(b);                        //for bitiş
+        }
+        Insert a;
+    }
+    public static void updateControl(List<Account> x){
+        for(Account a:x){
+            if(String.isBlank(a.phone)){
+                a.Phone.addError('You cannot obmit phone field if you want to change it, please enter a new value.');
+                    
+                
+            }
+        }
     }
 }
 
 
 
-trigger Merhaba on Account(before insert, after insert, before update,after update,
-                           before delete, after delete, after undelete){
+
+      trigger Merhaba on Account(before insert, after insert, before update,after update,
+                           before delete, after delete, after undelete){//INSERT
   if(trigger.isInsert){
       if(trigger.isBefore){
-          System.debug('Before Insert is Running.');
           AccountHelper.SimpleInsert(trigger.new);  // Burada Helper Class ı çagırıyoruz.
-      }else{
-          System.debug('After Insert is Running');
-          System.debug(trigger.new);
-      }
-  }else if(trigger.isUpdate){
+          AccountHelper.ValidationRule(trigger.new);
+    }else{
+          AccountHelper.ContactCreate(trigger.new);
+}
+}//Update
+      if(trigger.isUpdate){
       if(trigger.isBefore){
-          System.debug('Before Update is Running.');
+        System.debug('Update Before'); 
+       AccountHelper.updateControl(trigger.new) ;  
       }else{
-          System.debug('After Update is Running');
+         System.debug('Update After');
+       AccountHelper.updateControl(trigger.new) ;   
       }
-  }else if(trigger.isDelete){
+  }else if(trigger.isDelete){//DELETE
        if(trigger.isBefore){
           System.debug('Before Delete is Running.');
       }else{
@@ -76,3 +67,7 @@ trigger Merhaba on Account(before insert, after insert, before update,after upda
   }
                                
                            }
+
+
+
+
