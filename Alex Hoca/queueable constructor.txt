@@ -1,0 +1,30 @@
+public class LeadQueueable Implements Queueable {            //Queueable bir class
+    //properties- variables
+    String CompanyName;
+    String LeadSourceStr;
+    //Constructor metod
+    public LeadQueueable(String CompanyName,String LeadSourceStr){
+    //isimler aynı olduğu için this()metod kullanıyoruz.
+    this.CompanyName=CompanyName;
+    this.LeadSourceStr=LeadSourceStr;
+    }
+    
+    //Burası Queueable metod  burada variable kullanarak çagırma yapacaksak CONSTRUCTOR metod oluşturmalıyız.
+    public void execute (QueueableContext  context){         //QueueableContext tıpkı String gibi bir variable
+        List<Lead> multiLead=[SELECT Id, Name, LeadSource ,Company
+                             FROM Lead WHERE Company=:CompanyName];
+        for(Lead singleLead:multiLead){
+            singleLead.LeadSource=LeadSourceStr;
+        }
+         update multiLead; 
+    }
+    }    // BUNUN ÇALIŞTIRILMASI FARKLI
+
+
+
+
+    BU ÇAGRILMASI
+
+    LeadQueueable Lq=New LeadQueueable('NEW AGAIN HOUSES', 'Constructor queueable');
+Id Leadjobid = System.enqueueJob(Lq);
+System.debug('JOB ID : '+Leadjobid);
