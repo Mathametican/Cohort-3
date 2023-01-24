@@ -1,0 +1,27 @@
+public class LeadBatch Implements Database.Batchable<SObject> {
+      //start
+    public Database.QueryLocator start(Database.BatchableContext BC){         // Database.BatchableContext bir data type STRING gibi
+    return Database.getQueryLocator('SELECT Id,FirstName, LastName, Company, LeadSource, Phone ,Email FROM Lead');
+    }
+    //Execute
+    public void execute(Database.BatchableContext BC, List<Lead> scope){
+        for(Lead s:scope){
+         s.FirstName=s.FirstName.ToUpperCase();
+         s.FirstName=s.FirstName.ToLowerCase();
+         }
+        update scope;
+    }
+    //Finish
+    public void finish(Database.BatchableContext BC){
+    System.debug('Lead Batch is Finished.');
+    }
+}
+
+
+ENTER APEX CODE
+
+
+
+LeadBatch bd=New LeadBatch();
+Database.executeBatch(bd , 1);
+
