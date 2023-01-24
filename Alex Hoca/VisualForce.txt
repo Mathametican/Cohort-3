@@ -1,0 +1,10 @@
+<apex:page >
+    <apex:form style="text-align:center;margin-top:300px">
+    <apex:inputText />
+        <br/><br/>
+    <apex:inputText />
+        <br/><br/>
+    <apex:commandButton style="background:green;width:40px;height:25px"  value="TEST" />
+    </apex:form>
+    
+</apex:page>
