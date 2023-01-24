@@ -1,10 +1,24 @@
-<apex:page >
+<apex:page Controller="Calculation">
     <apex:form style="text-align:center;margin-top:300px">
-    <apex:inputText />
+    <apex:inputText value="{!num1}" />
         <br/><br/>
-    <apex:inputText />
+    <apex:inputText value="{!num2}" />
         <br/><br/>
-    <apex:commandButton style="background:green;width:40px;height:25px"  value="TEST" />
+    <apex:commandButton style="background:green;width:100px;height:25px" action="{!sum}" value="sum result" />
+        <br/><br/>
+        <apex:outputText value="{!result}" />
     </apex:form>
     
 </apex:page>
+
+
+Controller APEX CLASS
+
+public class Calculation {
+       public static integer num1{set;get;}
+       public static integer num2{set;get;}
+       public static Integer result{set; get;}
+    public static void sum(){
+       result=num1+num2;
+    }
+}
