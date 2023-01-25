@@ -1,0 +1,28 @@
+public class DenemeClass {
+    public static List<Book__c> kayitList{set; get;}
+    
+    public static void sorguKayit(){
+    kayitList=[SELECT Id , Name FROM Book__c];
+    }
+}
+
+
+
+
+
+
+<apex:page Controller="DenemeClass">
+  <apex:form >
+     <apex:commandButton value="Kayıtları Getir" Style="Background:pink;color:black; Weight:40px;height:20px;" Action="{!sorguKayit}"/>
+         <apex:pageBlock >
+            <apex:pageBlockTable value="{!kayitList}" var="a">
+                <apex:column value="{!a.Name}" />
+                  <apex:column >
+                     <apex:commandButton Value="SİL" Style="Background:purple; color:grey"/>
+                     <apex:commandButton Value="DÜZENLE" Style="BackGround:Black;color:white"/>
+                     <apex:commandButton value="GÖSTER" Style="Background:red;color:yellow"/>
+                </apex:column>apex:column >
+            </apex:pageBlockTable>
+         </apex:pageBlock>
+  </apex:form>
+</apex:page>
