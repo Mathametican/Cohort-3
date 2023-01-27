@@ -1,0 +1,29 @@
+<apex:page controller="Game" >
+    <apex:pageBlock >
+        <apex:form style="text-align:center ;margin-top:150px"><br/><br/>
+             <h1>SAYI TAHMİN OYUNU</h1><br/><br/><br/><br/>
+             <h1>1 ile 100 arasında bir sayı giriniz.</h1><br/><br/>
+            <apex:inputText value="{!gelensayi}"/>
+            <br/><br/>
+            <apex:commandButton style="background:blue;color:white" value="Kontrol Et" action="{!tahmin}"/><br/><br/>
+            <apex:outputText value="{!dmsg}" style="color:green"/>
+            <apex:outputText value="{!ymsg}" style="color:red"/>
+            <br/><br/>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>
+
+
+CONTROLLER CLASS
+public class Game {
+    public static integer gelensayi{set; get;}
+    public static string ymsg{set; get;}
+    public static string dmsg{set; get;}
+    public static void tahmin(){
+       integer x=Integer.valueOf(Math.random()*100);
+        if(x==gelensayi){ dmsg='Tebrikler Doğru Tahmin Ettiniz. :)'; 
+}
+else{ymsg='Üzgünüz Yanlış Tahmin Ettiniz. :(   Gelen Sayı:  '+x;
+}
+}
+}
