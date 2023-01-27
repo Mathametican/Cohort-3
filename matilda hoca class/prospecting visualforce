@@ -1,0 +1,22 @@
+<apex:page controller="Calculation">
+    <apex:form style="text-align:center; margin-top:400px">
+    <apex:commandButton style="background:pink;weight:40px;height:30px/" action="{!createNum}" value="Procest a number"/ >
+        <br/><br/>
+        <apex:outputText value="{!t}"/>
+    </apex:form>
+</apex:page>
+
+
+CONTROLLER CLASS
+public class Calculation {
+    public static integer num1{set;get;}
+    public static integer num2{set;get;}
+    public static Integer result{set; get;}
+ public static Integer t{set; get;}
+ public static void multiply(){
+    result=num1*num2;
+ }
+ public static void CreateNum(){
+ t=Integer.valueOf(Math.random()*100);
+ }
+}
