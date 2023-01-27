@@ -1,0 +1,80 @@
+CUSTOM CLASS
+
+public class KitapHome {
+    public static string isim{set;get;}
+    public static book__c tekKayit{set;get;}
+    public static List<Book__c> getKayitList(){// get burada visual force için getter metod
+        List<Book__c> x=[SELECT id, Name FROM Book__c];
+        return x;
+    }
+    public pageReference SilMethod(){
+        String gelsilid=system.currentPageReference().getParameters().get('silid');  // demek ID string miş!!!!!!
+        Book__c c=[SELECT id, Name FROM Book__c WHERE Id =:gelsilid];
+        delete c;
+        return NULL;
+    }
+    public pageReference GosterMethod(){
+        String gelgosterId=System.currentPageReference().getParameters().get('gosterId');
+        PageReference nextPage=new PageReference('/apex/DetayPage?id='+gelgosterId); // burada hangi sayfaya gidecekse onun URL inin oluşturuyoruz.
+        tekKayit=[SELECT Id,Name FROM book__c WHERE ID=:gelgosterId];
+        return nextPage;
+    }
+    public pageReference GuncelleMethod(){
+      String gelgunId=System.currentPageReference().getParameters().get('gunId'); 
+      Book__c y=[SELECT Name FROM book__c WHERE ID=:gelgunId];
+      y.Name=isim;
+      update y; 
+      PageReference np=new pageReference('/apex/KitapClass');
+      return np;
+     
+    }
+}
+
+
+
+
+1.VISUALFORCE PageReference
+<apex:page Controller="KitapHome">
+   <apex:form >
+    <apex:pageBlock >
+        <apex:pageBlockTable value="{!KayitList}" var="a">
+            <apex:column value="{!a.Name}"/>
+            <apex:column >
+              <apex:commandLink action="{!SilMethod}">SİL
+                  <apex:param value="{!a.id}" name="silid"/>     <!--apex:param metod ile parametre çagırıyoruz.-->
+                </apex:commandLink>
+            </apex:column> <br/><br/> 
+            <apex:column >
+              <apex:commandLink action="{!GosterMethod}">GÖSTER
+                  <apex:param value="{!a.Id}" name="gosterId" />
+              </apex:commandLink>
+            </apex:column><br/><br/>
+            <apex:column >  
+               <apex:commandLink action="{!GosterMethod}">DÜZENLE
+                   <apex:param value="{!a.Id}" name="gosterId"/>
+               </apex:commandLink>
+            </apex:column>    
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>
+
+
+
+2.VISUALFORCE PageReference
+
+
+<apex:page Controller="KitapHome">
+    <apex:pageBlock>
+        <h1>ID</h1><br/><br/>
+        <apex:outputText value="{!tekKayit.Id}"/><br/><br/>
+        <h2>İSİM</h2><br/><br/>
+        <apex:outputText value="{!tekKayit.Name}"/><br/><br/>
+        <apex:form>
+            <apex:InputText value="{!isim}" /><br/>
+          <apex:commandLink action="{!GuncelleMethod}">KAYDET
+            <apex:param name="gunId" value="{!tekKayit.Id}"/>
+          </apex:commandLink>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>
