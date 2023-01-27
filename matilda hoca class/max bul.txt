@@ -1,0 +1,30 @@
+<apex:page controller="sayikar">
+    <apex:pageBlock >
+      <apex:form style="text-align:center; margin-top:150px">
+            <h3>SAYI KARŞILAŞTIRMA</h3><br/><br/>
+            <h1>1.Sayı</h1>
+            <apex:inputText value="{!sayi1}"/><br/><br/>
+            <h2>2.sayı</h2>
+            <apex:inputText value="{!sayi2}"/><br/><br/>
+          <apex:commandButton value="Karşılaştır" Style="background:black;color:grey" action="{!sonuc}"/><br/><br/>
+            <apex:outputText value="{!msg}"/>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>
+
+
+CONTROLLER CLASS
+
+public class sayikar {
+    public static integer sayi1{set; get;}
+    public static integer sayi2{set; get;}
+    public static string  msg{set; get;}
+    public static void Sonuc(){
+        if(sayi1>sayi2){
+            msg='En Büyük Sayı '+sayi1+' \'dir.';
+        }else{
+            msg='En Büyük Sayı '+sayi2+' \'dir.';   
+        }
+}
+}
+
