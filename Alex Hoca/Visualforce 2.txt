@@ -1,0 +1,98 @@
+BU YAPMASI EN ZOR OLAN
+
+<apex:page controller="developerToolsController" docType="html-5.0" LightningStylesheets="true">
+  HOW MANY={!howMany}
+  
+  <apex:form >
+  <apex:inputText value="{!prefix}" label="NamePref"  id="NamePref"/>
+  <apex:inputText value="{!howMany}" label="How Many"  id="totalcount"/>
+  <apex:commandButton action="{!createAcc}" value="Create Account" />
+  </apex:form>
+  
+  <apex:form >
+  <apex:inputText value="{!SearchTerm}" label="NamePref" id="NamePref"/>
+  <apex:commandButton action="{!deleteAcc}" value="Delete Account" />
+  <apex:commandButton action="{!searchAcc}" value="Search Account" />
+  </apex:form>
+  
+  <apex:form >
+  <apex:pageBlock >
+  <apex:pageBlockTable var="acc" value="{!multiAcc}" >
+  
+  <apex:column headerValue="Name">
+  <apex:inputField value="{!acc.Name}"/>
+  </apex:column>
+  
+  <apex:column headerValue="Phone">
+  <apex:inputField value="{!acc.Phone}"/>
+  </apex:column>
+  
+  <apex:column headerValue="Industry">
+  <apex:inputField value="{!acc.Industry}"/>
+  </apex:column>
+  
+  <apex:column headerValue="Website">
+  <apex:inputField value="{!acc.website}"/>
+  </apex:column>
+  
+  </apex:pageBlockTable>
+  
+  <apex:pageBlockButtons >
+  
+  <apex:commandButton value="Update Account" action="{!UpdateAcc}" />
+  
+  </apex:pageBlockButtons>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>
+
+
+
+CONTROLLER CLASS
+
+
+public class developerToolsController {
+
+//properties
+
+  public Integer howMany{set;get;}
+  public string prefix{set;get;}
+  public List<Account> multiAcc{set;get;}
+  public string searchTerm{set;get;}
+  
+  //constructor metod
+  public developerToolsController(){
+  howMany=0;
+  prefix='';
+  multiAcc=New List<Account>();
+  }
+  
+  
+  public PageReference createAcc(){
+  for(Integer i=1;i<=howMany;i++){
+  Account acc=New Account();
+  acc.Name=prefix+'-'+i;
+  multiAcc.add(acc);
+  }
+  insert multiacc;
+  return null;
+  }
+  
+  
+  public PageReference deleteAcc(){
+  delete multiAcc;
+  multiAcc.clear();
+  return null;
+  }  
+  public PageReference searchAcc(){
+  String SearchSOQL='%'+searchTerm+'%';
+  multiAcc=[SELECT Id, Name,Phone,website,Industry FROM Account WHERE Name LIKE :SearchSOQL ];
+  return null;
+  }
+  
+  public PageReference UpdateAcc() {
+        update multiAcc;
+        return null;
+    }
+  }
+
