@@ -1,0 +1,52 @@
+EXTENSION OLUŞTURMA
+
+<apex:page StandardController="Account" Extensions="CalculateOpportunity" >
+<h1>Account Details</h1><br/>
+{!account.Id}<br/>
+{!account.Name}<br/>
+{!account.phone}<br/>
+{!account.Website}<br/>
+<br/>
+
+<apex:pageBlock title="Account">
+<apex:pageBlockSection title="Opportunities" >
+
+<apex:pageBlockTable value="{!multiopp}" var="opp">
+<apex:column value="{!opp.Id}"/>
+<apex:column value="{!opp.Name}"/>
+<apex:column value="{!opp.Amount}"/>
+<apex:column value="{!opp.CloseDate}"/>
+<apex:column value="{!opp.stageName}"/>
+</apex:pageBlockTable>
+</apex:pageBlocksection>
+TOTAL AMOUNT:<b>{!TotalAmount}</b>
+</apex:pageBlock>
+</apex:page>
+
+
+CONTROLLER CLASS 
+
+public class CalculateOpportunity {
+
+     public String accid{get;set;}
+     public List<Opportunity> multiopp{get;set;}
+     private Decimal totalAmount=0;
+     
+    //constructor method
+
+    public CalculateOpportunity(ApexPages.StandardController controller) {
+    accid=ApexPages.currentPage().getParameters().get('id');
+    multiopp=New List<Opportunity>();
+    System.debug(accid+'Constructor is working');
+    multiopp=[SELECT Id, Name, Amount, CloseDate, StageName FROM Opportunity WHERE accountId=:accid];
+
+    }
+    
+ //get method
+     public Decimal gettotalAmount(){
+     for(    Opportunity singleOpp:multiopp){
+     totalAmount=+singleOpp.Amount;
+     }
+     return totalAmount;
+}
+}
