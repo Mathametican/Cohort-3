@@ -1,0 +1,25 @@
+public class crew{
+
+    public string message;
+    public integer z0number;
+
+
+
+    public class people{
+
+    public string name;
+   public string craft;
+    }
+
+    /*
+
+  "message": "success",
+  "number": NUMBER_OF_PEOPLE_IN_SPACE,
+  "people": [
+    {"name": NAME, "craft": SPACECRAFT_NAME},
+    ...
+  ]
+}ic class jsonResolve crew{
+
+*/
+}
